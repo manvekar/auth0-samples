@@ -1,0 +1,52 @@
+# Change Log
+
+## [1.0.0-beta.4](https://github.com/auth0/aspnetcore-api/tree/1.0.0-beta.4) (2026-02-26)
+
+**Security**
+- chore: Upgrade dependencies [\#34](https://github.com/auth0/aspnetcore-api/pull/34) ([kailash-b](https://github.com/kailash-b))
+
+## [1.0.0-beta.3](https://github.com/auth0/aspnetcore-api/tree/1.0.0-beta.3) (2026-01-19)
+
+**Added**
+- Adds compile-time support for .NET 10 [\#25](https://github.com/auth0/aspnetcore-api/pull/25) ([kailash-b](https://github.com/kailash-b))
+
+## [1.0.0-beta.2](https://github.com/auth0/aspnetcore-api/tree/1.0.0-beta.2) (2025-12-02)
+
+**Fixed**
+- Update docfx configurations and broken links [\#15](https://github.com/auth0/aspnetcore-api/pull/15) ([kailash-b](https://github.com/kailash-b))
+
+**Security**
+- Update dependencies [\#16](https://github.com/auth0/aspnetcore-api/pull/16) ([kailash-b](https://github.com/kailash-b))
+
+## [1.0.0-beta.1](https://github.com/auth0/aspnetcore-api/tree/1.0.0-beta.1) (2025-11-20)
+
+### Installation
+```bash
+dotnet add package Auth0.AspNetCore.Authentication.Api
+```
+
+### Usage
+```csharp
+builder.Services.AddAuth0ApiAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"];
+    options.JwtBearerOptions = new JwtBearerOptions
+    {
+        Audience = builder.Configuration["Auth0:Audience"]
+    };
+});
+```
+
+### Added
+- JWT Bearer authentication with Auth0-specific configuration
+- Built-in DPoP (RFC 9449) support with three enforcement modes: `Allowed`, `Required`, `Disabled`
+- Fluent configuration API via `AddAuth0ApiAuthentication()` and `WithDPoP()`
+- Comprehensive documentation with examples and migration guide
+- Playground application with Postman collection
+
+### Dependencies
+- `Microsoft.AspNetCore.Authentication.JwtBearer` 8.0.21
+- `Microsoft.Extensions.Logging.Abstractions` 8.0.0
+- Target framework: .NET 8.0+
+
+

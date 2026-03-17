@@ -38,7 +38,8 @@
     ".claude/agents/secret-scanner-agent.md",
     ".claude/agents/git-identity-verifier.md",
     ".claude/agents/pre-push-security-gate.md",
-    ".claude/agents/task-manager-agent.md"
+    ".claude/agents/task-manager-agent.md",
+    ".claude/agents/repository-readme-maintainer-agent.md"
   ],
   "planReviewRequired": true,
   "context": {

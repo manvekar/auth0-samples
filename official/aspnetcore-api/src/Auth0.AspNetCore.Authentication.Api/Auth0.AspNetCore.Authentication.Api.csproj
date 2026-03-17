@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0,net10.0</TargetFrameworks>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+
+    <AssemblyName>Auth0.AspNetCore.Authentication.Api</AssemblyName>
+    <RootNamespace>Auth0.AspNetCore.Authentication.Api</RootNamespace>
+
+    <!-- NuGet Package Configuration -->
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+
+    <PackageId>Auth0.AspNetCore.Authentication.Api</PackageId>
+    <Product>Auth0 ASP.NET Core API Authentication</Product>
+
+    <Title>Auth0 ASP.NET Core API Authentication</Title>
+    <Description>A library that provides everything the standard JWT Bearer authentication offers, with the added power of built-in DPoP (Demonstration of Proof-of-Possession) support for enhanced token security. Simplify your Auth0 JWT authentication integration for ASP.NET Core APIs with Auth0-specific configuration and validation.</Description>
+    <Summary>Auth0 JWT authentication for ASP.NET Core APIs with built-in DPoP support</Summary>
+    <PackageTags>auth0;authentication;jwt;bearer;dpop;aspnetcore;api;security;oauth2;openid;oidc</PackageTags>
+
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReleaseNotes>See https://github.com/auth0/aspnetcore-api/releases for release notes.</PackageReleaseNotes>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.1" Condition="'$(TargetFramework)' == 'net9.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.3" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" Condition="'$(TargetFramework)' == 'net9.0'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.3" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.124" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\docs-source\images\logo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Auth0.AspNetCore.Authentication.Api.UnitTests" />
+    <InternalsVisibleTo Include="Auth0.AspNetCore.Authentication.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+</Project>

@@ -35,12 +35,13 @@
       ".claude/agents",
       ".claude/skills"
     ],
-    "autoLoad": [
-      "secret-scanner-agent",
-      "git-identity-verifier",
-      "pre-push-security-gate",
-      "task-manager-agent"
-    ]
+     "autoLoad": [
+       "secret-scanner-agent",
+       "git-identity-verifier",
+       "pre-push-security-gate",
+       "task-manager-agent",
+       "repository-readme-maintainer-agent"
+     ]
   },
   "permission": {
     "deny": [
