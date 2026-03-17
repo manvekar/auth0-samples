@@ -1,0 +1,32 @@
+repos:
+  - repo: local
+    hooks:
+      - id: git-identity-check
+        name: Git Identity Verification
+        description: Verify git user.email is manvekar@gmail.com
+        entry: scripts/verify-git-identity.sh
+        language: script
+        stages: [commit, push]
+        pass_filenames: false
+        always_run: true
+
+      - id: gitleaks
+        name: Gitleaks Secret Scanning
+        description: Scan for secrets in staged files
+        entry: gitleaks protect --staged
+        language: go
+        types: [text]
+        pass_filenames: true
+        stages: [commit]
+        require_serial: true
+        minimum_pre_commit_version: "2.9.0"
+
+      - id: detect-secrets
+        name: Detect Secrets
+        description: Additional secret scanning coverage
+        entry: detect-secrets scan --baseline .secrets.baseline
+        language: python
+        types: [text]
+        pass_filenames: true
+        stages: [commit]
+        always_run: false

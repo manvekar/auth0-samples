@@ -1,0 +1,23 @@
+# Project Context & Task Tracking
+
+## Session Info
+- Created: <!-- Add timestamp when agent creates -->
+- Agent: <!-- Claude Code / KiloCode -->
+- Repository: <!-- Auto-detected -->
+
+## Active Feature: <!-- Feature name -->
+- Description: <!-- What's being built -->
+- Target Branch: feature/<!-- slug -->
+- PR: #<!-- number if created -->
+
+## Task Breakdown
+
+<!-- Tasks added by agent -->
+
+## Incomplete Tasks (High Priority)
+- <!-- List tasks with status != Completed -->
+
+## Completion History
+| Task | Completed | Commit | DoD Verified |
+| -----|-----------|--------|--------------|
+| <!-- --> | <!-- --> | <!-- --> | <!-- --> |

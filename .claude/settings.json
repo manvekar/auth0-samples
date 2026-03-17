@@ -1,0 +1,47 @@
+{
+  "respectGitignore": true,
+  "sandbox": {
+    "enabled": true,
+    "paths": ["//C:/MD/auth0"]
+  },
+  "permission": {
+    "deny": [
+      "Read(./*.env*)",
+      "Read(./secrets/*)",
+      "Read(./*.pem)",
+      "Read(./*.key)",
+      "Read(./*.secret)",
+      "Read(./appsettings.Development.json)"
+    ],
+    "allow": [
+      "Bash(gitleaks*)",
+      "Bash(detect-secrets*)",
+      "Bash(trufflehog*)",
+      "Bash(dotnet test*)",
+      "Bash(git push*)"
+    ]
+  },
+  "hooks": {
+    "preCommit": [
+      "scripts/verify-git-identity.sh",
+      "gitleaks protect --staged",
+      "detect-secrets scan"
+    ],
+    "prePush": [
+      "scripts/verify-git-identity.sh",
+      "gitleaks protect --staged",
+      "detect-secrets scan",
+      "trufflehog git --fail --results=verified"
+    ]
+  },
+  "autoLoadAgents": [
+    ".claude/agents/secret-scanner-agent.md",
+    ".claude/agents/git-identity-verifier.md",
+    ".claude/agents/pre-push-security-gate.md",
+    ".claude/agents/task-manager-agent.md"
+  ],
+  "planReviewRequired": true,
+  "context": {
+    "requiredFiles": ["PROJECT_CONTEXT.md", "AGENTS.md"]
+  }
+}

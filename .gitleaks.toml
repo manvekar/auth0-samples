@@ -1,0 +1,73 @@
+title = "Auth0 SDK Custom Rules"
+
+[allowlist]
+paths = [
+    '''tests''',
+    '''\.git''',
+    '''node_modules''',
+    '''bin/''',
+    '''obj/''',
+    '''\.github''',
+    '''_site/''',
+    '''docs/''',
+]
+
+[[rules]]
+id = "auth0-client-secret"
+description = "Auth0 Application Client Secret"
+regex = '''(auth0\.com.*['"]?client_secret['"]?\s*[:=]\s*['"]?[A-Za-z0-9\-_]{40}['"]?)'''
+tags = ["auth0", "secret"]
+
+[[rules]]
+id = "auth0-client-id"
+description = "Auth0 Application Client ID"
+regex = '''(auth0\.com.*['"]?client_id['"]?\s*[:=]\s*['"]?[A-Za-z0-9]{8,12}['"]?)'''
+tags = ["auth0", "identifier"]
+
+[[rules]]
+id = "auth0-domain"
+description = "Auth0 Domain"
+regex = '''(['"]?[a-z0-9-]+\.auth0\.com['"]?)'''
+tags = ["auth0", "config"]
+
+[[rules]]
+id = "auth0-audience"
+description = "Auth0 API Audience"
+regex = '''(['"]?https://[a-z0-9-]+\.auth0\.com/api/[a-zA-Z0-9\-_]+['"]?)'''
+tags = ["auth0", "config"]
+
+[[rules]]
+id = "auth0-management-token"
+description = "Auth0 Management API Token"
+regex = '''(eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\.[A-Za-z0-9\-_]{100,})'''
+tags = ["auth0", "jwt", "secret"]
+
+[[rules]]
+id = "dotnet-connection-string"
+description = ".NET Connection String with credentials"
+regex = '''(Server\s*=\s*[^;]+;\s*Database\s*=\s*[^;]+;\s*User Id\s*=\s*[^;]+;\s*Password\s*=\s*[^;]+;)'''
+tags = ["sql", "credential"]
+
+[[rules]]
+id = "dpop-private-key"
+description = "DPoP Private Key (EC or RSA)"
+regex = '''(-----BEGIN (EC |RSA )?PRIVATE KEY-----[\s\S]+?-----END (EC |RSA )?PRIVATE KEY-----)'''
+tags = ["crypto", "secret", "dpop"]
+
+[[rules]]
+id = "jwt-secret"
+description = "JWT Signing Secret"
+regex = '''(['"]?secret['"]?\s*[:=]\s*['"]?[A-Za-z0-9+/=]{32,}['"]?)'''
+tags = ["jwt", "secret"]
+
+[[rules]]
+id = "integration-test-credentials"
+description = "Integration Test Secrets"
+file = '''tests/.*IntegrationTests/.*\.(cs|json|config)'''
+regex = '''(BASIC_CLIENT_SECRET|DPOP_.*_SECRET|CLIENT_SECRET)\s*[:=]\s*['"]?[A-Za-z0-9\-_]{20,}['"]?'''
+tags = ["test", "secret"]
+
+# Standard Gitleaks rules are included by default
+
+[config]
+allowlist.disabled = false

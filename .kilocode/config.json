@@ -1,0 +1,69 @@
+{
+  "agent": {
+    "name": "auth0-sdk-agent",
+    "mode": "subagent",
+    "security": {
+      "preCommitHooks": {
+        "enabled": true,
+        "required": ["git-identity", "gitleaks", "detect-secrets"]
+      },
+      "prePushHooks": {
+        "enabled": true,
+        "required": ["git-identity", "gitleaks", "detect-secrets", "trufflehog"]
+      },
+      "blockedPaths": [
+        "**/.env*",
+        "**/secrets/**",
+        "**/*.pem",
+        "**/*.key",
+        "**/*.secret",
+        "**/appsettings.Development.json"
+      ]
+    },
+    "taskManagement": {
+      "enabled": true,
+      "contextFile": "PROJECT_CONTEXT.md",
+      "autoCreate": true,
+      "enforceDoD": true,
+      "pushAfterCompletion": true,
+      "prioritizeIncomplete": true
+    }
+  },
+  "skills": {
+    "paths": [
+      ".kilocode/skills",
+      ".claude/agents",
+      ".claude/skills"
+    ],
+    "autoLoad": [
+      "secret-scanner-agent",
+      "git-identity-verifier",
+      "pre-push-security-gate",
+      "task-manager-agent"
+    ]
+  },
+  "permission": {
+    "deny": [
+      "Read(./*.env*)",
+      "Read(./secrets/*)",
+      "Read(./*.pem)",
+      "Read(./*.key)"
+    ],
+    "allow": [
+      "Bash(gitleaks*)",
+      "Bash(detect-secrets*)",
+      "Bash(dotnet test*)",
+      "Bash(git*)"
+    ]
+  },
+  "hooks": {
+    "sessionStart": ["task-manager-agent:check-incomplete"],
+    "preCommit": ["git-identity-verifier", "secret-scanner-agent"],
+    "prePush": ["pre-push-security-gate"],
+    "preComplete": ["task-manager-agent:verify-dod"]
+  },
+  "logging": {
+    "securityEvents": ".security/agent-audit.log",
+    "taskHistory": "PROJECT_CONTEXT.md"
+  }
+}
